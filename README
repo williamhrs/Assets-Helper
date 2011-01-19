@@ -1,0 +1,7 @@
+Helper to load Assets to your project.
+
+To use this helper you must create a public folder into your home directory.
+
+public/
+public/css
+public/js
