@@ -5,3 +5,18 @@ To use this helper you must create a public folder into your home directory.
 public/
 public/css
 public/js
+
+
+In order to use it you can do like this:
+
+$data['css'] = load_css(array('css1.css','css2.css'));
+$data['js'] = load_js(array('js1.js','js2.js'));
+
+$this->load->view('example',$data);
+
+
+example.php
+<head>
+<?php echo $js; ?>
+<?php echo $css; ?>
+</head>
