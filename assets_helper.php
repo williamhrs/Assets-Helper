@@ -15,7 +15,7 @@ if (!function_exists('load_css')) {
 
         $return = '';
         foreach ($css as $c) {
-            $return .= '<link rel="stylesheet" href="' . site_url() . 'public/css/' . $c . '"></script>' . "\n";
+            $return .= '<link rel="stylesheet" href="' . site_url() . 'public/css/' . $c . '"/>' . "\n";
         }
         return $return;
     }
