@@ -52,6 +52,8 @@ if (!function_exists('load_js')) {
 if (!function_exists('load_img')) {
 
     function load_img($img){
+	$CI =& get_instance();
+	$CI->load->helper('url');
         return base_url().'public/images/' . $img;
     }
 
