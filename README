@@ -1,15 +1,23 @@
 Helper to load Assets to your project.
 
-To use this helper you must create a public folder into your home directory.
+To use this helper you must create a assets folder into your home directory.
 
-public/
-public/css
-public/js
+assets/
+assets/css
+assets/js
 
 
 In order to use it you can do like this:
 
-$data['css'] = load_css(array('css1.css','css2.css'));
+$data['css'] = load_css('global.css');
+// -- OR --
+$data['css'] = load_css(array('global.css','page.css'));
+// -- OR --
+$data['css'] = load_css(array(
+	array('screen.css', 'screen, projection'),
+	array('print.css', 'print'),
+));
+
 $data['js'] = load_js(array('js1.js','js2.js'));
 
 $this->load->view('example',$data);
