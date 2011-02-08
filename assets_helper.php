@@ -25,11 +25,12 @@ if (!function_exists('load_css')) {
 		$CI =& get_instance();
 		$CI->load->helper('html');
 
-		$csspath = site_url() . 'assets/css/';
+		$csspath = base_url() . 'assets/css/';
 
 		if (!is_array($data))
 			return link_tag($csspath . $data, 'stylesheet', 'text/css');
 		else {
+			$return = '';
 			foreach ($data as $item) {
 				if (!is_array($item)) {
 					$return .= link_tag($csspath . $item, 'stylesheet', 'text/css');
@@ -57,7 +58,7 @@ if (!function_exists('load_js')) {
 
 		$return = '';
 		foreach ($js as $j) {
-			$return .= '<script type="text/javascript" src="' . site_url() . 'assets/js/' . $j . '"></script>' . "\n";
+			$return .= '<script type="text/javascript" src="' . base_url() . 'assets/js/' . $j . '"></script>' . "\n";
 		}
 		return $return;
 	}
