@@ -1,11 +1,13 @@
 Helper to load Assets to your project.
 
-To use this helper you must create a assets folder into your home directory.
+To use this helper you must create a public folder into your home directory.
 
-assets/
-assets/css
-assets/js
+public/
+public/css
+public/js
 
+
+You may use a different folder, and set it up on your "assets.php" file inside the config folder.
 
 In order to use it you can do like this:
 
@@ -28,3 +30,5 @@ example.php
 <?php echo $js; ?>
 <?php echo $css; ?>
 </head>
+
+To load an image you can use <img src="<?php echo load_img('flowers.jpg') ?>" />
