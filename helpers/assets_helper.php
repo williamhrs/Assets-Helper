@@ -25,10 +25,10 @@ if (!function_exists('load_css')) {
 		$CI =& get_instance();
 		$CI->load->helper('html');
                 $CI->config->load('assets');
-                if(!$this->config->item('css_path')){
-                    $this->config->set_item('css_path','public/css/');
+                if(!$CI->config->item('css_path')){
+                    $CI->config->set_item('css_path','public/css/');
                 }
-		$csspath = base_url() . $this->config->item('css_path');
+		$csspath = base_url() . $CI->config->item('css_path');
 
 		if (!is_array($data))
 			return link_tag($csspath . $data, 'stylesheet', 'text/css');
@@ -61,10 +61,10 @@ if (!function_exists('load_js')) {
 			$js = (array) $js;
 		}
                 $CI->config->load('assets');
-                if(!$this->config->item('js_path')){
-                    $this->config->set_item('js_path','public/js/');
+                if(!$CI->config->item('js_path')){
+                    $CI->config->set_item('js_path','public/js/');
                 }
-                $jspath =  base_url() . $this->config->item('js_path');
+                $jspath =  base_url() . $CI->config->item('js_path');
 		$return = '';
 		foreach ($js as $j) {
 			$return .= '<script type="text/javascript" src="' . $jspath . $j . '"></script>' . "\n";
@@ -86,10 +86,10 @@ if (!function_exists('load_img')) {
 		$CI =& get_instance();
 		$CI->load->helper('url');
                 $CI->config->load('assets');
-                if(!$this->config->item('image_path')){
-                    $this->config->set_item('image_path','public/image/');
+                if(!$CI->config->item('image_path')){
+                    $CI->config->set_item('image_path','public/image/');
                 }
-                $imagepath =  base_url() . $this->config->item('image_path');
+                $imagepath =  base_url() . $CI->config->item('image_path');
 		return base_url(). $imagepath . $img;
 	}
 
