@@ -77,7 +77,7 @@ if (!function_exists('load_js')) {
 /*
  * Method to insert images into your project.
  * @author William Rufino
- * @version 1.2
+ * @version 1.3
  * @param string $image - path to image
  */
 if (!function_exists('load_img')) {
@@ -90,7 +90,7 @@ if (!function_exists('load_img')) {
                     $CI->config->set_item('image_path','public/image/');
                 }
                 $imagepath =  base_url() . $CI->config->item('image_path');
-		return base_url(). $imagepath . $img;
+		return $imagepath . $img;
 	}
 
 }
