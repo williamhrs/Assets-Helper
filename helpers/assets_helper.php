@@ -79,19 +79,19 @@ if (!function_exists('load_js')) {
  * @author William Rufino
  * @version 1.3
  * @param string $image - path to image
+ * @param string $alt - o texto da imagem
  */
 if (!function_exists('load_img')) {
 
-	function load_img($img){
+	function load_img($img,$alt = NULL){
 		$CI =& get_instance();
 		$CI->load->helper('url');
                 $CI->config->load('assets');
-                if(!$CI->config->item('image_path')){
-                    $CI->config->set_item('image_path','public/image/');
+                if(!$CI->config->item('img_path')){
+                    $CI->config->set_item('img_path','public/img/');
                 }
-                $imagepath =  base_url() . $CI->config->item('image_path');
-		return $imagepath . $img;
+                $imagepath =  base_url() . $CI->config->item('img_path');
+        return  (is_null($alt)) ? "<img src=\"$imagepath/$img\">" : "<img src=\"$imagepath/$img\" alt=\"$alt\">";
 	}
-
 }
 
