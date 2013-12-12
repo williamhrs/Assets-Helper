@@ -73,25 +73,44 @@ if (!function_exists('load_js')) {
 	}
 
 }
-
 /*
  * Method to insert images into your project.
- * @author William Rufino
- * @version 1.3
+ * @author Neto Fontenele and William Rufino
+ * @version 1.4
  * @param string $image - path to image
- * @param string $alt - o texto da imagem
+ * @param string $alt - the text of image
+ * @param mixin $atributs
+ * @return String tag img com parametros
+ * Usage:
+ *      echo load_img('28188.jpg','este é o alt',array('class' => 'a b','id' => 'c'))
+ *      echo load_img('28188.jpg',false,'class="a"')
+ *      echo load_img('28188.jpg',false)
+ *      echo load_img('28188.jpg','alt da imagem','class="a"') ?>
  */
-if (!function_exists('load_img')) {
+if ( !function_exists('load_img') ) {
 
-	function load_img($img,$alt = NULL){
-		$CI =& get_instance();
-		$CI->load->helper('url');
-                $CI->config->load('assets');
-                if(!$CI->config->item('img_path')){
-                    $CI->config->set_item('img_path','public/img/');
-                }
-                $imagepath =  base_url() . $CI->config->item('img_path');
-        return  (is_null($alt)) ? "<img src=\"$imagepath/$img\">" : "<img src=\"$imagepath/$img\" alt=\"$alt\">";
-	}
-}
+    function load_img( $img , $alt = TRUE , $attributes = '' )
+    {
+        $CI = & get_instance();
+        $CI->load->helper('url');
+        $CI->config->load('assets');
+        if ( !$CI->config->item('img_path') ) {
+            $CI->config->set_item('img_path' , 'public/img/');
+        }
+        if ( is_array($attributes) ) {
+            $atts = '';
+            foreach ( $attributes as $key => $val ) {
+                $atts .= ' ' . $key . '="' . $val . '"';
+            }
+            $attributes = $atts;
+        } elseif ( is_string($attributes) AND strlen($attributes) > 0 ) {
+            $attributes = ' ' . $attributes;
+        }
+        $imagepath = base_url() . $CI->config->item('img_path');
+
+        $exist_alt = "<img src=\"$imagepath$img\"$attributes alt=\"$alt\">\n";
+        $not_exist_alt = "<img src=\"$imagepath$img\"$attributes>\n";
+
+        return ($alt) ? $exist_alt : $not_exist_alt;
+    }
 
