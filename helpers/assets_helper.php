@@ -48,8 +48,6 @@ if (!function_exists('load_css')) {
 }
 /*
  * Method to insert images into your project.
- * @author Neto Fontenele
- * @version 1.0
  * @param string $image - path to image
  * @param string $alt - the text of image
  * @param mixin $atributs
