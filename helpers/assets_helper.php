@@ -47,51 +47,64 @@ if (!function_exists('load_css')) {
 
 }
 /*
- * Method to load javascript files into your project.
- * @author William Rufino
- * @version 1.4
- * @param array $js
- */
-if (!function_exists('load_js')) {
-
-	function load_js($js) {
-		$CI =& get_instance();
-		$CI->load->helper('url');
-		if (!is_array($js)) {
-			$js = (array) $js;
-		}
-                $CI->config->load('assets');
-                if(!$CI->config->item('js_path')){
-                    $CI->config->set_item('js_path','public/js/');
-                }
-                $jspath =  base_url() . $CI->config->item('js_path');
-		$return = '';
-		foreach ($js as $j) {
-			$return .= '<script type="text/javascript" src="' . $jspath . $j . '"></script>' . "\n";
-		}
-		return $return;
-	}
-
-}
-
-/*
  * Method to insert images into your project.
- * @author William Rufino
- * @version 1.3
+ * @author Neto Fontenele
+ * @version 1.0
  * @param string $image - path to image
+ * @param string $alt - the text of image
+ * @param mixin $atributs
+ * @return String tag img com parametros
+ * Usage:
+ *      echo load_img('28188.jpg','este é o alt',array('class' => 'a b','id' => 'c'))
+ *      echo load_img('28188.jpg',false,'class="a"')
+ *      echo load_img('28188.jpg',false)
+ *      echo load_img('28188.jpg','alt da imagem','class="a"') ?>
  */
-if (!function_exists('load_img')) {
+if ( !function_exists('load_img') ) {
 
-	function load_img($img){
-		$CI =& get_instance();
-		$CI->load->helper('url');
-                $CI->config->load('assets');
-                if(!$CI->config->item('image_path')){
-                    $CI->config->set_item('image_path','public/image/');
-                }
-                $imagepath =  base_url() . $CI->config->item('image_path');
-		return $imagepath . $img;
-	}
+    function load_img( $img , $alt = TRUE , $attributes = '' )
+    {
+        $CI = & get_instance();
+        $CI->load->helper('url');
+        $CI->config->load('assets');
+        if ( !$CI->config->item('img_path') ) {
+            $CI->config->set_item('img_path' , 'public/img/');
+        }
+        if ( is_array($attributes) ) {
+            $atts = '';
+            foreach ( $attributes as $key => $val ) {
+                $atts .= ' ' . $key . '="' . $val . '"';
+            }
+            $attributes = $atts;
+        } elseif ( is_string($attributes) AND strlen($attributes) > 0 ) {
+            $attributes = ' ' . $attributes;
+        }
+        $imagepath = base_url() . $CI->config->item('img_path');
+
+        $exist_alt = "<img src=\"$imagepath$img\"$attributes alt=\"$alt\">\n";
+        $not_exist_alt = "<img src=\"$imagepath$img\"$attributes>\n";
+
+        return ($alt) ? $exist_alt : $not_exist_alt;
+    }
 
 }
+/*
+ * Method to insert file into your page.
+ * @param string $file - path to file
+ * @return String $file to path 
+ */
+if ( !function_exists('include_file') ) {
 
+    function include_file( $file )
+    {
+        $CI = & get_instance();
+        $CI->config->load('assets');
+        if ( !$CI->config->item('file_path') ) {
+            $CI->config->set_item('file_path' , 'public/includes/');
+        }
+        $include_file =  $CI->config->item('file_path');
+        if ( file_exists($include_file.$file) ){
+            return $include_file.$file;
+        }
+    }
+}
